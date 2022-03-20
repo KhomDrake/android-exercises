@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Exercises"/>
+
+    <style name="Exercises.Widget"/>
+
+    <style name="Exercises.Widget.Button">
+        <item name="android:textAppearance">@style/Exercises.Style.Text.SubTitle</item>
+        <item name="android:background">@drawable/background_rounded_green_big</item>
+    </style>
+
+    <style name="Exercises.Widget.Button.Error">
+        <item name="android:background">@drawable/background_rounded_red_big</item>
+    </style>
+
+    <style name="Exercises.Style"/>
+
+    <style name="Exercises.Style.Shimmer">
+        <item name="shimmer_auto_start">true</item>
+        <item name="shimmer_highlight_color">@color/color_shimmer</item>
+        <item name="shimmer_base_color">@color/white</item>
+        <item name="shimmer_repeat_count">10</item>
+        <item name="shimmer_repeat_mode">restart</item>
+    </style>
+
+    <style name="Exercises.Style.Text"/>
+
+    <style name="Exercises.Style.Text.Normal">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Exercises.Style.Text.Normal.Primary">
+        <item name="android:textColor">@color/primary_color</item>
+    </style>
+
+    <style name="Exercises.Style.Text.Normal.Secondary">
+        <item name="android:textColor">@color/secondary_color</item>
+    </style>
+
+    <style name="Exercises.Style.Text.Big">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Exercises.Style.Text.Big.Primary">
+        <item name="android:textColor">@color/primary_color</item>
+    </style>
+
+    <style name="Exercises.Style.Text.Input">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/primary_color</item>
+        <item name="android:textColorHint">@color/color_hint</item>
+    </style>
+
+    <style name="Exercises.Style.Text.Title">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Exercises.Style.Text.Title.Primary">
+        <item name="android:textColor">@color/primary_color</item>
+    </style>
+
+    <style name="Exercises.Style.Text.SubTitle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Exercises.Style.Text.SubTitle.Big">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="Exercises.Style.Text.SubTitle.Primary">
+        <item name="android:textColor">@color/primary_color</item>
+    </style>
+
+    <style name="Exercises.Style.Text.SubTitle.Secondary">
+        <item name="android:alpha">.5</item>
+    </style>
+</resources>
