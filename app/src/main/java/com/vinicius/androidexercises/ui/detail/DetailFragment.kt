@@ -53,12 +53,7 @@ class DetailFragment : Fragment(R.layout.detail_fragment) {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 val fragment: Fragment? = when(tab.position) {
                     RepositoryInformation.COMMITS.ordinal -> {
-                        CommitsFragment().apply {
-                            arguments = Bundle().apply {
-                                putString(REPOSITORY_FULL_NAME_ARGS, repository.fullName)
-                                putString(LANGUAGE_REPOSITORY_ARGS, repository.language)
-                            }
-                        }
+                        CommitsFragment(repository.fullName, repository.language)
                     }
                     RepositoryInformation.ISSUES.ordinal -> {
                         IssuesFragment().apply {
@@ -87,7 +82,7 @@ class DetailFragment : Fragment(R.layout.detail_fragment) {
 
                 fragment?.let {
                     childFragmentManager.beginTransaction().apply {
-                        replace(R.id.container, it)
+                        add(R.id.container, it)
                     }.commit()
                 }
             }
@@ -98,12 +93,7 @@ class DetailFragment : Fragment(R.layout.detail_fragment) {
 
         })
 
-        val fragment = CommitsFragment().apply {
-            arguments = Bundle().apply {
-                putString(REPOSITORY_FULL_NAME_ARGS, repository.fullName)
-                putString(LANGUAGE_REPOSITORY_ARGS, repository.language)
-            }
-        }
+        val fragment = CommitsFragment(repository.fullName, repository.language)
 
         childFragmentManager.beginTransaction().apply {
             replace(R.id.container, fragment)

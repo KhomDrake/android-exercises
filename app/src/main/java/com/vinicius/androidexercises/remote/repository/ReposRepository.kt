@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.vinicius.androidexercises.data.network.RepositoryResponse
+import com.vinicius.androidexercises.data.ui.Repository
 import com.vinicius.androidexercises.remote.network.GithubApi
 import com.vinicius.androidexercises.remote.paging.RepositoryPagingSource
 import kotlinx.coroutines.flow.Flow
@@ -21,11 +21,11 @@ class ReposRepository(private val githubApi: GithubApi) {
 
     fun repositoriesPaging(
         language: String,
-        errorFirstPage: MutableLiveData<Throwable>
-    ) : Flow<PagingData<RepositoryResponse>> {
+        e: MutableLiveData<Throwable>
+    ) : Flow<PagingData<Repository>> {
         return Pager(
             config = pagingConfig,
-            pagingSourceFactory = { RepositoryPagingSource(githubApi, language, errorFirstPage) }
+            pagingSourceFactory = { RepositoryPagingSource(githubApi, language, e) }
         ).flow
     }
 }

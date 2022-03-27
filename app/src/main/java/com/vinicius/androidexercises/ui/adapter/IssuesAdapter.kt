@@ -59,8 +59,6 @@ class IssueViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             date.text = context.getString(R.string.issues_date, issue.createdAt.toDateUS())
         }
 
-        date.isVisible = issue.createdAt.isNullOrEmpty().not()
-
         access.setOnClickListener {
             context.openLink(issue.htmlUrl)
         }

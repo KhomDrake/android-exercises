@@ -27,7 +27,10 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CommitsFragment : Fragment(R.layout.commits_fragment) {
+class CommitsFragment(
+    private val repositoryFullName: String,
+    private val repositoryLanguage: String?
+) : Fragment(R.layout.commits_fragment) {
 
     private val commits: RecyclerView by viewProvider(R.id.commits)
     private val root: ViewGroup by viewProvider(R.id.root)
@@ -43,14 +46,14 @@ class CommitsFragment : Fragment(R.layout.commits_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
-        arguments?.let {
-            val repositoryFullName: String = it.getString(REPOSITORY_FULL_NAME_ARGS) ?: ""
-            val repositoryLanguage: String = it.getString(LANGUAGE_REPOSITORY_ARGS) ?: ""
-            viewModel.language = repositoryLanguage
-            viewModel.repo = repositoryFullName
-        }
+        viewModel.language = repositoryLanguage ?: ""
+        viewModel.repo = repositoryFullName
         setupViewStateMachine()
         setupErrorView()
+    }
+
+    override fun onStart() {
+        super.onStart()
         loadCommits()
     }
 

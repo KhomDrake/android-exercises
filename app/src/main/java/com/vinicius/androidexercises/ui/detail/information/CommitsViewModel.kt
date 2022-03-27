@@ -1,12 +1,13 @@
 package com.vinicius.androidexercises.ui.detail.information
 
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import androidx.paging.map
-import com.vinicius.androidexercises.data.ui.CommitBody
+import com.vinicius.androidexercises.data.ui.Issue
+import com.vinicius.androidexercises.data.ui.Repository
 import com.vinicius.androidexercises.remote.repository.CommitsRepository
 import com.vinicius.androidexercises.ui.PagingViewModel
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.catch
 
 class CommitsViewModel(private val commitsRepository: CommitsRepository) : PagingViewModel() {
 
@@ -15,8 +16,10 @@ class CommitsViewModel(private val commitsRepository: CommitsRepository) : Pagin
 
     fun commitsPaging() = commitsRepository.commitsPaging(
         repo, language, _error
-    ).map {
-        it.map { commit -> CommitBody(commit) }
-    }.cachedIn(viewModelScope)
+    )
+    .catch {
+        PagingData.empty<Issue>()
+    }
+    .cachedIn(viewModelScope)
 
 }

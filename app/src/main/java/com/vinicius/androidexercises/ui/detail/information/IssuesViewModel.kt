@@ -1,24 +1,22 @@
 package com.vinicius.androidexercises.ui.detail.information
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import androidx.paging.map
 import com.vinicius.androidexercises.data.ui.Issue
+import com.vinicius.androidexercises.data.ui.Repository
 import com.vinicius.androidexercises.remote.repository.IssuesRepository
 import com.vinicius.androidexercises.ui.PagingViewModel
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.map
 
 class IssuesViewModel(private val issuesRepository: IssuesRepository) : PagingViewModel() {
 
     var repo: String = ""
 
     fun issuesPaging() = issuesRepository.issuesPaging(repo, _error)
-        .map {
-            it.map { issue -> Issue(issue) }
-        }.catch {
-
-        }.cachedIn(viewModelScope)
+        .catch {
+            PagingData.empty<Issue>()
+        }
+        .cachedIn(viewModelScope)
 
 }

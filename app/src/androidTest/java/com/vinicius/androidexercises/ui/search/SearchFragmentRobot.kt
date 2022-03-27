@@ -159,8 +159,8 @@ class SearchFragmentCheck : Check, KoinComponent {
         }
     }
 
-    fun openAccessUserHomeLink() {
-        "https://github.com/khom".checkLinkOpening()
+    fun openAccessAvatarLink() {
+        "https://avatars.githubusercontent.com/u/1550444?v=4".checkLinkOpening()
     }
 
 }

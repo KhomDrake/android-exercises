@@ -62,7 +62,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         setupData()
         loadRepos()
         setupError()
-
     }
 
     private fun setupError() {
@@ -145,7 +144,6 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
 
     override fun onDestroyView() {
         viewStateMachine.shutdown()
-        repos.adapter = null
         super.onDestroyView()
     }
 }

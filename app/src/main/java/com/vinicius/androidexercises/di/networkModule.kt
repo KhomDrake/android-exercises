@@ -8,6 +8,7 @@ import retrofit2.Retrofit
 
 val networkModule = module {
     single { ClientBuilder.build() }
+    single { ClientBuilder.build() }
     single { RetrofitBuilder.build(get()) }
     single { get<Retrofit>().create(GithubApi::class.java) }
 }

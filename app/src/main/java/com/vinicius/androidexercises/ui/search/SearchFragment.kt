@@ -34,7 +34,7 @@ class SearchFragment : Fragment(R.layout.search_fragment) {
     private val errorView: ErrorView by viewProvider(R.id.error_view)
     private val users: RecyclerView by viewProvider(R.id.users)
     private val adapter = UserAdapter {
-        requireContext().openLink(it.url)
+        requireContext().openLink(it.avatarUrl)
     }
 
     private val viewStateMachine = ViewStateMachine()
@@ -133,7 +133,6 @@ class SearchFragment : Fragment(R.layout.search_fragment) {
 
     override fun onDestroyView() {
         viewStateMachine.shutdown()
-        users.adapter = null
         super.onDestroyView()
     }
 }

@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.vinicius.androidexercises.data.network.IssueResponse
+import com.vinicius.androidexercises.data.ui.Issue
 import com.vinicius.androidexercises.remote.network.GithubApi
 import com.vinicius.androidexercises.remote.paging.IssuesPagingSource
 import kotlinx.coroutines.flow.Flow
@@ -19,11 +19,11 @@ class IssuesRepository(private val githubApi: GithubApi) {
 
     fun issuesPaging(
         repo: String,
-        firstPageError: MutableLiveData<Throwable>
-    ) : Flow<PagingData<IssueResponse>> {
+        fPE: MutableLiveData<Throwable>
+    ) : Flow<PagingData<Issue>> {
         return Pager(
             config = pagingConfig,
-            pagingSourceFactory = { IssuesPagingSource(githubApi, repo, firstPageError) }
+            pagingSourceFactory = { IssuesPagingSource(githubApi, repo, fPE) }
         ).flow
     }
 

@@ -43,18 +43,20 @@ class UserAdapter(
         return UserViewHolder(view)
     }
 
-}
+    inner class UserViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-class UserViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val avatarUrl: AppCompatImageView by viewProvider(R.id.avatar_url)
+        private val login: AppCompatTextView by viewProvider(R.id.login)
+        val userHome: AppCompatTextView by viewProvider(R.id.user_home)
 
-    private val avatarUrl: AppCompatImageView by viewProvider(R.id.avatar_url)
-    private val login: AppCompatTextView by viewProvider(R.id.login)
-    val userHome: AppCompatTextView by viewProvider(R.id.user_home)
-
-    fun bind(user: User) {
-        avatarUrl.load(user.avatarUrl) {
-            crossfade(1000)
+        fun bind(user: User) {
+            avatarUrl.load(user.avatarUrl) {
+                crossfade(1000)
+            }
+            login.text = user.login
         }
-        login.text = user.login
     }
+
 }
+
+

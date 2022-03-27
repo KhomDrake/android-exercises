@@ -72,7 +72,9 @@ class CommitsFragmentSetup : Setup<CommitsFragmentLaunch, CommitsFragmentCheck>,
     }
 
     override fun setupLaunch() {
-        launchFragmentInContainer<CommitsFragment>(args, themeResId = R.style.Theme_Androidexercises)
+        launchFragmentInContainer(args, themeResId = R.style.Theme_Androidexercises) {
+            CommitsFragment(repo, language)
+        }
         Thread.sleep(500)
     }
 

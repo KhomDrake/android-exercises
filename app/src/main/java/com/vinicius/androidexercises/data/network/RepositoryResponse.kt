@@ -17,6 +17,7 @@ class RepositoryResponse(
     val description: String?,
     val isFork: Boolean,
     @SerializedName("created_at")
+//    @SerializedName("created_at")
     val createdAt: String,
     @SerializedName("updated_at")
     val updatedAt: String,

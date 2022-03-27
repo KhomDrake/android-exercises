@@ -85,7 +85,7 @@ class SearchFragmentTest {
     }
 
     @Test
-    fun openScreen_andTypeUser_andClickIconToSearch_andClickAccessUserHomeLink_shouldOpenAccessUserHomeLink() {
+    fun openScreen_andTypeUser_andClickIconToSearch_andClickAccessUserAvatarLink_shouldOpenAccessAvatarLink() {
         setup {
             withLoadUsersSuccess()
         } launch {
@@ -93,7 +93,7 @@ class SearchFragmentTest {
             clickSearchIcon()
             clickAccessUserHomeLink()
         } check {
-            openAccessUserHomeLink()
+            openAccessAvatarLink()
         }
     }
 

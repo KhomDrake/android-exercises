@@ -3,7 +3,7 @@ package com.vinicius.androidexercises.remote.paging
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.vinicius.androidexercises.data.network.RepositoryResponse
+import com.vinicius.androidexercises.data.ui.Repository
 import com.vinicius.androidexercises.remote.network.GithubApi
 
 const val DEFAULT_PAGE = 1
@@ -11,29 +11,31 @@ const val DEFAULT_PAGE = 1
 class RepositoryPagingSource(
     private val githubApi: GithubApi,
     private val language: String,
-    private val errorFirstPage: MutableLiveData<Throwable>
+    private val e: MutableLiveData<Throwable>
 ) :
-    PagingSource<Int, RepositoryResponse>() {
+    PagingSource<Int, Repository>() {
 
-    override fun getRefreshKey(state: PagingState<Int, RepositoryResponse>) = state.anchorPosition
+    override fun getRefreshKey(state: PagingState<Int, Repository>) = state.anchorPosition
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, RepositoryResponse> {
-        val page = params.key ?: DEFAULT_PAGE
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Repository> {
+        val a = params.key ?: DEFAULT_PAGE
         return runCatching {
             val response = githubApi.searchReposAsync(
-                "language:$language", page
+                "language:kotlin", a
             )
 
-            val nextKey = if (page * PER_PAGE >= response.totalCount) null else page + 1
+            val k = if (a * PER_PAGE >= response.totalCount) null else a + 1
+
+            val items = response.items.map { repositoryResponse -> Repository(repositoryResponse) }
 
             LoadResult.Page(
-                response.items,
-                prevKey = if (page == DEFAULT_PAGE) null else page - 1,
-                nextKey = if(response.totalCount == 0) null else nextKey
+                items,
+                prevKey = if (a == DEFAULT_PAGE) null else a - 1,
+                nextKey = if(response.totalCount == 0) null else k
             )
         }.getOrElse {
-            if(page == DEFAULT_PAGE)
-                errorFirstPage.postValue(it)
+            if(a == DEFAULT_PAGE)
+                e.postValue(it)
 
             LoadResult.Error(it)
         }
